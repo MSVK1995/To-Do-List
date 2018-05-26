@@ -63,7 +63,7 @@ class App extends Component {
                 <span>
                   <strong
                     style={{ cursor: "pointer" }}>
-                    {index + 1 + ' '}
+                    {index + 1 + ' . '}
                   </strong>
                   <span
                     onClick={(event) => this.completedTaskHandler(event, index + 1)}
