@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Cockpit from '../cockpit/Cockpit';
+import Cockpit from '../../components/cockpit/Cockpit';
 
 class App extends Component {
 
@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   deleteAllTasksHandler = () => {
-    if (window.confirm("Are you sure you want to delete all tasks? ( " + (this.state.todolist.length - 1) + " ).")) {
+    if (window.confirm("Are you sure you want to delete all tasks? ( " + (this.state.todolist.length - 1) + " selected ).")) {
       this.setState({
         todolist: []
       });
