@@ -9,6 +9,7 @@ const cockpit = (props) => {
         inpVal = '';
         inpVal = inpVal + event.target.value;
         inpEvent = event.target;
+        // console.log(inpEvent.value);
     };
 
     //When user clicks on ADD button.
@@ -19,7 +20,7 @@ const cockpit = (props) => {
 
     //When user presses 'Enter' key from text input.
     let keyPressHandler = (target) => {
-        if (target.charCode === 13) {
+        if (target.charCode === 13 && target.target.value !== '') {
             props.addtask(inpVal);
             inpEvent.value = '';
         }
