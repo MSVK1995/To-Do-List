@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.list-group-item:hover {
+  animation-delay: 500ms;
+font-size: 40px;
+}
 
 
 
