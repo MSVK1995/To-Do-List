@@ -2,8 +2,12 @@
   text-align: center;
 }
 
-.list-group-item:hover {
-  font-size: 20px;
+.list-group-item > *{
+  transition: 0.4s ease;
+}
+
+.list-group-item:hover > *{
+  font-size: 16px;
 /* transform: scale(1.02, 1.2); */
 }
 

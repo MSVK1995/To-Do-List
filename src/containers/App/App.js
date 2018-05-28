@@ -60,7 +60,6 @@ class App extends Component {
                 key={index}
                 onClick={() => this.removeTaskHandler(index)}
                 title="click to delete the task">
-                <span>
                   <strong
                     style={{ cursor: "pointer" }}>
                     {index + 1 + ' . '}
@@ -71,7 +70,6 @@ class App extends Component {
                     title="Select to mark/unmark task as completed">
                     {' ' + taskEle.content}
                   </span>
-                </span>
               </li>
             })}
           </ol>
