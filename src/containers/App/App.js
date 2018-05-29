@@ -5,7 +5,7 @@ import Cockpit from '../../components/cockpit/Cockpit';
 class App extends Component {
 
   state = {
-    todolist: [Object]
+    todolist: new Array({})
   };
   addToListHandler = (val) => {
     const taskList = [...this.state.todolist];
@@ -22,8 +22,7 @@ class App extends Component {
 
   removeTaskHandler = (index) => {
     let getList = [...this.state.todolist];
-    getList.splice(index + 1, 1);
-    getList[index].hover = false;
+    getList.splice(index , 1);
     this.setState({ todolist: getList });
   }
 
@@ -43,7 +42,7 @@ class App extends Component {
       });
     }
   }
-  handleHoverOptions = (index) =>{
+  handleHoverOptions = (index) => {
     let getList = [...this.state.todolist];
     getList[index].hover = !(getList[index].hover);
     this.setState({
@@ -68,20 +67,30 @@ class App extends Component {
                 key={index}
                 onClick={() => this.removeTaskHandler(index)}
                 title="click to delete the task"
-                onMouseEnter = {()=>this.handleHoverOptions(index)}
-                onMouseLeave = {()=>this.handleHoverOptions(index)}>
-                  <strong
-                    style={{ cursor: "pointer" }}>
-                    {index + 1 + ' . '}
-                  </strong>
-                  <span
-                    onClick={(event) => this.completedTaskHandler(event, index + 1)}
-                    style={{ textDecoration: taskEle.strike, cursor: 'pointer', backgroundColor: taskEle.strike ? 'green' : 'white', color: taskEle.strike ? 'white' : 'black' }}
-                    title="Select to mark/unmark task as completed">
-                    {' ' + taskEle.content}
-                  </span>
-                  <div style = {{textAlign: 'right'}}>{this.state.todolist[index].hover && <a  onClick = {(event)=>this.completedTaskHandler(event, index + 1)}>Hello</a>}</div>
-                  {/* <span style = {{marginRight: '3px'}}>{this.state.todolist[index].hover && <span onClick = {(event)=>this.removeTaskHandler(event, index + 1)}>Hello</span>}</span> */}
+                onMouseEnter={() => this.handleHoverOptions(index)}
+                onMouseLeave={() => this.handleHoverOptions(index)}
+                style = {{dsplay: 'inline'}}>
+                <strong
+                  style={{ cursor: "pointer" }}>
+                  {index + 1 + ' . '}
+                </strong>
+                <span
+                  onClick={(event) => this.completedTaskHandler(event, index + 1)}
+                  style={{ textDecoration: taskEle.strike, cursor: 'pointer', backgroundColor: taskEle.strike ? 'green' : 'white', color: taskEle.strike ? 'white' : 'black' }}
+                  title="Select to mark/unmark task as completed">
+                  {' ' + taskEle.content}
+                </span>
+                <center>
+                  {this.state.todolist[index].hover &&
+                  <a
+                      onClick={(event) => this.completedTaskHandler(event, index + 1)}>
+                  Hello</a>}
+                  {this.state.todolist[index].hover &&
+                    <a
+                      onClick={(event) => this.removeTaskHandler(event, index + 1)}>Delete
+                      </a>}
+                </center>
+                {/* <span style = {{marginRight: '3px'}}>{this.state.todolist[index].hover && <span onClick = {(event)=>this.removeTaskHandler(event, index + 1)}>Hello</span>}</span> */}
               </li>
             })}
           </ol>
