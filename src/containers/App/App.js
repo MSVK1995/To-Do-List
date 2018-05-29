@@ -84,10 +84,10 @@ class App extends Component {
                   {this.state.todolist[index].hover &&
                   <a
                       onClick={(event) => this.completedTaskHandler(event, index + 1)}>
-                  Hello</a>}
+                  Complete</a>}
                   {this.state.todolist[index].hover &&
                     <a
-                      onClick={(event) => this.removeTaskHandler(event, index + 1)}>Delete
+                      onClick={(event) => this.removeTaskHandler(event, index + 1)}> Delete
                       </a>}
                 </center>
                 {/* <span style = {{marginRight: '3px'}}>{this.state.todolist[index].hover && <span onClick = {(event)=>this.removeTaskHandler(event, index + 1)}>Hello</span>}</span> */}
