@@ -1,21 +1,23 @@
 import React from 'react';
 
 const cockpit = (props) => {
-    var inpVal;
-    var inpEvent;
+    var inpVal ;
+    var inpEvent = null;
 
     //text changes in input field is given to inputVal for list display in App.js
     let changeInputHandler = (event) => {
         inpVal = '';
         inpVal = inpVal + event.target.value;
         inpEvent = event.target;
-        // console.log(inpEvent.value);
+        //console.log(inpEvent.value, inpVal);
     };
 
     //When user clicks on ADD button.
     let addTaskHandler = () => {
-        props.addtask(inpVal);
-        inpEvent.value = '';
+        if (inpEvent !==null) {
+            props.addtask(inpVal);
+            inpEvent.value = '';
+        }
     }
 
     //When user presses 'Enter' key from text input.
