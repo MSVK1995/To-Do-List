@@ -15,7 +15,7 @@ class App extends Component {
     else {
       const taskList = [...this.state.todolist];
       let task = false;
-      task = taskList.map(o => o.content === val).reduce((val, nxt) =>val || nxt);
+      task = taskList.map(o => o.content === val).reduce(((val, nxt) =>{return(val || nxt)}), false);
       console.log(task);
       if (val !== '' && task===false) {
         taskList.push({ content: val, strike: '', hover: false });
