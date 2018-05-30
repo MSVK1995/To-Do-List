@@ -4,27 +4,18 @@
 
 .list-group-item > *{
   transition: 0.4s ease;
-<<<<<<< HEAD
-}
-
-.list-group-item:hover > *{
-=======
   display: inline;
   cursor: pointer;
 }
 
 .list-group-item:hover > * {
->>>>>>> 37a4a62c510785111deadc18cb4a34a7bf4bd866
   font-size: 16px;
 /* transform: scale(1.02, 1.2); */
 }
 
-<<<<<<< HEAD
-=======
 .options {
   float: right;
 }
 
->>>>>>> 37a4a62c510785111deadc18cb4a34a7bf4bd866
 
 
