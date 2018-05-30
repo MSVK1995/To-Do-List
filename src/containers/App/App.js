@@ -5,25 +5,42 @@ import Cockpit from '../../components/cockpit/Cockpit';
 class App extends Component {
 
   state = {
-    todolist: new Array({})
+    todolist: null
   };
   addToListHandler = (val) => {
-    const taskList = [...this.state.todolist];
-    if (val !== '') {
-      taskList.push({ content: val, strike: '', hover: false });
-      this.setState({
-        todolist: taskList
-      });
+    if (this.state.todolist === null) {
+      if (val !== '')
+        this.setState({todolist:[{content: val, strike: '', hover: false}] }, () =>{console.log(this.state.todolist);})
+    }
+    else {
+      const taskList = [...this.state.todolist];
+      let task = false;
+      task = taskList.map(o => o.content === val).reduce((val, nxt) =>val || nxt);
+      console.log(task);
+      if (val !== '' && task===false) {
+        taskList.push({ content: val, strike: '', hover: false });
+        this.setState({
+          todolist: taskList
+        }, () =>{console.log(this.state.todolist);});
+      }
+      else{
+        alert("Task already exists");
+        task = false;
+      }
     }
     // if (this.state.todolist[0].content === '')
     //   this.state.todolist.splice(0, 1);
-    // console.log(this.state.todolist);
+    //console.log(this.state.todolist);
   }
+
+
 
   removeTaskHandler = (index) => {
     let getList = [...this.state.todolist];
-    getList.splice(index , 1);
-    this.setState({ todolist: getList });
+    getList.splice(index, 1);
+    //console.log(getList, index, getList[index]);
+    this.setState({ todolist: getList}, () => {
+      console.log(this.state.todolist);});
   }
 
   completedTaskHandler = (event, index) => {
@@ -36,22 +53,58 @@ class App extends Component {
   }
 
   deleteAllTasksHandler = () => {
-    if (window.confirm("Are you sure you want to delete all tasks? ( " + (this.state.todolist.length - 1) + " selected ).")) {
+    if (window.confirm("Are you sure you want to delete all tasks? ( " + (this.state.todolist.length) + " selected ).")) {
       this.setState({
         todolist: []
       });
     }
   }
-  handleHoverOptions = (index) => {
+  handleHoverOptions = (event,index) => {
+    event.stopPropagation();
     let getList = [...this.state.todolist];
-    getList[index].hover = !(getList[index].hover);
+    if(event.type === 'mouseenter')
+    {
+      getList[index].hover = true;
+    }
+    else
+    getList[index].hover = false;
     this.setState({
       todolist: getList
     });
+    //console.log(this.state.todolist);
   }
 
 
   render() {
+    let display = (this.state.todolist === null ? null : this.state.todolist.map((taskEle, index) => {
+      return <li
+        className="list-group-item"
+        key={index}
+        //onClick={() => this.removeTaskHandler(index)}
+        //title="Delete Task"
+        onMouseEnter={(event) => this.handleHoverOptions(event, index)}
+        onMouseLeave={(event) => this.handleHoverOptions(event,index)}
+        >
+        <strong
+          style={{ cursor: "pointer" }}>
+          {index + 1 + ' . '}
+        </strong>
+        <span
+          onClick={(event) => this.completedTaskHandler(event, index)}
+          style={{ textDecoration: taskEle.strike, cursor: 'pointer', backgroundColor: taskEle.strike ? 'green' : 'white', color: taskEle.strike ? 'white' : 'black' }}
+          title="Complete Task">
+          {' ' + taskEle.content}
+        </span>
+        <div className='options'>
+          <span title='Complete Task'>{this.state.todolist[index].hover && <span onClick={(event) => this.completedTaskHandler(event, index)}>Complete</span>}</span>
+          <span title='Delete Task'>{this.state.todolist[index].hover? <span onClick={() => this.removeTaskHandler(index)} style = {{paddingLeft: '20px', cursor: 'pointer'}}>Delete</span>:null}</span>
+        </div> 
+        {/* <span style = {{marginRight: '3px'}}>{this.state.todolist[index].hover && <span onClick = {(event)=>this.removeTaskHandler(event, index + 1)}>Hello</span>}</span> */}
+      </li>
+    }));
+
+
+
     return (
       <div className="container">
         <h1 style={{ textAlign: "center" }}> To-Do List </h1>
@@ -61,42 +114,11 @@ class App extends Component {
         <hr />
         <div>
           <ol className="list-group">
-            {this.state.todolist.slice(1).map((taskEle, index) => {
-              return <li
-                className="list-group-item"
-                key={index}
-                onClick={() => this.removeTaskHandler(index)}
-                title="click to delete the task"
-                onMouseEnter={() => this.handleHoverOptions(index)}
-                onMouseLeave={() => this.handleHoverOptions(index)}
-                style = {{dsplay: 'inline'}}>
-                <strong
-                  style={{ cursor: "pointer" }}>
-                  {index + 1 + ' . '}
-                </strong>
-                <span
-                  onClick={(event) => this.completedTaskHandler(event, index + 1)}
-                  style={{ textDecoration: taskEle.strike, cursor: 'pointer', backgroundColor: taskEle.strike ? 'green' : 'white', color: taskEle.strike ? 'white' : 'black' }}
-                  title="Select to mark/unmark task as completed">
-                  {' ' + taskEle.content}
-                </span>
-                <center>
-                  {this.state.todolist[index].hover &&
-                  <a
-                      onClick={(event) => this.completedTaskHandler(event, index + 1)}>
-                  Complete</a>}
-                  {this.state.todolist[index].hover &&
-                    <a
-                      onClick={(event) => this.removeTaskHandler(event, index + 1)}> Delete
-                      </a>}
-                </center>
-                {/* <span style = {{marginRight: '3px'}}>{this.state.todolist[index].hover && <span onClick = {(event)=>this.removeTaskHandler(event, index + 1)}>Hello</span>}</span> */}
-              </li>
-            })}
+            {display}
           </ol>
         </div>
       </div>
-    );
+    )
   }
 }
 
