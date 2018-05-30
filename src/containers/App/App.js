@@ -37,7 +37,7 @@ class App extends Component {
   completedTaskHandler = (event, index) => {
     event.stopPropagation();
     let completedTaskArray = [...this.state.todolist];
-    completedTaskArray[index].strike = (completedTaskArray[index].strike === '') ? 'line-through' : '';
+    completedTaskArray[index-1].strike = (completedTaskArray[index-1].strike === '') ? 'line-through' : '';
     this.setState({
       todolist: completedTaskArray
     });
