@@ -1,6 +1,11 @@
+body {
+  background-image: url("../../images/todo.jpg")
+}
+
 .App {
   text-align: center;
 }
+
 
 .list-group-item > *{
   transition: 0.4s ease;
