@@ -30,7 +30,7 @@ class App extends Component {
   removeTaskHandler = (index) => {
     let getList = [...this.state.todolist];
     getList.pop(index);
-    this.setState({ todolist: getList });
+    this.setState({ todolist: getList});
     //console.log(this.state.todolist)
   }
 
