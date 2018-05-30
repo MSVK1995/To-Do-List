@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.list-group-item > *{
+  transition: 0.4s ease;
+  display: inline;
+  cursor: pointer;
+}
+
+.list-group-item:hover > *{
+  font-size: 16px;
+/* transform: scale(1.02, 1.2); */
+}
+
+.options {
+  float: right;
+}
+
+
+
