@@ -92,11 +92,11 @@ class App extends Component {
         <span
           onClick={(event) => this.completedTaskHandler(event, index)}
           style={{ textDecoration: taskEle.strike, cursor: 'pointer', backgroundColor: taskEle.strike ? 'green' : 'white', color: taskEle.strike ? 'white' : 'black' }}
-          title="Complete Task">
+          title={taskEle.strike === '' ? "Mark Complete": "Mark Incomplete"}>
           {' ' + taskEle.content}
         </span>
         <div className='options'>
-          <span title='Complete Task'>{this.state.todolist[index].hover && <span onClick={(event) => this.completedTaskHandler(event, index)}>Complete</span>}</span>
+          <span title={taskEle.strike === '' ? "Mark Complete": "Mark Incomplete"}>{this.state.todolist[index].hover && <span onClick={(event) => this.completedTaskHandler(event, index)}>Complete</span>}</span>
           <span title='Delete Task'>{this.state.todolist[index].hover? <span onClick={() => this.removeTaskHandler(index)} style = {{paddingLeft: '20px', cursor: 'pointer'}}>Delete</span>:null}</span>
         </div> 
         {/* <span style = {{marginRight: '3px'}}>{this.state.todolist[index].hover && <span onClick = {(event)=>this.removeTaskHandler(event, index + 1)}>Hello</span>}</span> */}
