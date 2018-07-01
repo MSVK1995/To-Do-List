@@ -53,10 +53,15 @@ class App extends Component {
   }
 
   deleteAllTasksHandler = () => {
-    if (window.confirm("Are you sure you want to delete all tasks? ( " + (this.state.todolist.length) + " selected ).")) {
-      this.setState({
-        todolist: []
-      });
+    if(this.state.todolist === null || this.state.todolist.length === 0){
+      alert('The list is empty');
+    }
+    else{
+      if (window.confirm("Are you sure you want to delete all tasks? ( " + (this.state.todolist.length) + " selected ).")) {
+        this.setState({
+          todolist: []
+        });
+      }
     }
   }
   handleHoverOptions = (event,index) => {
